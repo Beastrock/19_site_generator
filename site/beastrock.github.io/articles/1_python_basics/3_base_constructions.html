@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="Encyclopedia from devman.org">
+        <meta name="author" content="Beastrock">
+
+        <title>python_basics | Основные конструкции</title>
+
+        <!-- Bootstrap Core CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+        <!-- Custom CSS -->
+        <style>
+
+        body {
+            padding-top: 60px;
+            /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+            padding-bottom: 60px;
+        }
+
+        ul li {
+            margin-bottom: 8px;
+            display: list-item;
+            text-align: -webkit-match-parent;
+        }
+
+        footer {
+            margin-top: 50px;
+            padding-top: 50px;
+            border-width: 100px;
+        }
+
+        .articles_title {
+            margin-top: 45px;
+            margin-bottom: 10px;
+        }
+
+        .navbar-text {
+            color: black;
+        }
+
+        #back_to_index_button {
+            margin-top: 20px; 
+        }
+
+        #header_logo, #header_logo:hover {
+            text-decoration: None;
+            color: black;
+        }
+
+        </style>
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+    </head>
+
+    <body>
+
+        <!-- Navigation -->
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container-fluid">
+                <div class="navbar-header navbar-right">
+                    <a class="navbar-brand" href="https://devman.org">
+                        <img alt="Brand" src="https://devman.org/assets/images/devman.png">
+                    </a>
+                </div>
+                <div class="navbar-header navbar-left">
+                    <a id=header_logo href="../../index.html">
+                        <h4>Энциклопедия <span class="glyphicon glyphicon-book" aria-hidden="true"></span></h4>
+                    </a>
+                </div>
+            </div>
+        </nav>
+
+        <div class="articles_title page-header">
+             <h2 class="text-center">Основные конструкции</h2>
+        </div>
+
+        <div class="container">
+            <div style="height: 20px;"></div>
+            <div class="container">
+                <h3>Коротко о главных управляющих конструкциях</h3>
+<p>Сейчас мы совсем реактивно пройдёмся по самым основным управляющим конструкциям. Гет реди.</p>
+<h3>if</h3>
+<p>Ну, вы все знаете условный оператор, так ведь?</p>
+<pre class="codehilite"><code class="language-python">if age &lt; 18:
+    print('Никаких тебе сигарет. Ишь чего удумал!')
+else:
+    print('Вам синий или красный?')</code></pre>
+
+
+<p>Есть ещё <code>elif</code>, их можно сделать много в одном операторе. Это такой аналог <code>which</code> из других языков.</p>
+<h3>for</h3>
+<p>Цикл. Вместо сишного варианта с init, cond и loop выражениями, тут просто итерация по коллекции:</p>
+<pre class="codehilite"><code class="language-python">for user in users:
+    print user</code></pre>
+
+
+<p>Иногда надо не пройтись по списку, а выполнить одну и ту же операцию много раз. Тогда хорошо подходит функция
+<a href="https://docs.python.org/3.5/library/functions.html#func-range">range</a>. Она возвращает целые числа в заданном промежутке,
+поэтому в цикле её можно использовать так:</p>
+<pre class="codehilite"><code class="language-python">for level_num in range(10):
+    user.levelup()  # пользователь получит десять уровней. Читер!</code></pre>
+
+
+<p>А вот <code>break</code> и <code>continue</code> делают то же, что в Паскале и Сях. <code>break</code> прерывает выполнение цикла,
+<code>continue</code> завершает текущую итерацию и переходит к следующей.</p>
+<p>Ещё у цикла есть <code>else</code>, но про него почти никто не знает. Как он работает можно посмотреть
+<a href="https://docs.python.org/3.5/tutorial/controlflow.html#break-and-continue-statements-and-else-clauses-on-loops">в официальной документации</a>.</p>
+<h3>def</h3>
+<p>Начало объявления функции. После него идёт название,
+потом – аргументы функции в скобках, двоеточие и тело функции с отступом:</p>
+<pre class="codehilite"><code class="language-python">def get_square(value):
+    return value ** 2</code></pre>
+
+
+<p>То, что после <code>return</code> – это возвращаемое значение функции.</p>
+<p>Функцию создали, вот как её теперь использовать:</p>
+<pre class="codehilite"><code class="language-python">print(get_square(2))  # 4
+print(get_square(6))  # 36
+print(get_square('ыыы'))  # всё сломается</code></pre>
+
+
+<p>А вот пример посложнее, из исходников Девмана. Получает пользователя по айди в Слаке:</p>
+<pre class="codehilite"><code class="language-python">def _get_user_by_slack_id(slack_user_id):
+    user_email = get_slack_email_for_user(slack_user_id)
+    return User.objects.filter(email__iexact=user_email).first()</code></pre>
+
+
+<p>(вот почему емейл необходим)</p>
+<h3>range</h3>
+<p>Функция очень полезная, поэтому про неё отдельно. <code>range</code> генерирует целые числа в заданном диапазоне. Например:</p>
+<pre class="codehilite"><code class="language-python">range(10)  # 0..0
+range(5, 10)  # 5..9
+range(5, 10, 2)  # [5, 7, 9] (от пяти до девяти с шагом два)</code></pre>
+
+
+<p>Фишка этой функции заключается в том, что она не создаёт список со всеми числами.
+Вместо этого он вернёт объект, который будет возвращать элементы как только они нужны, по одному.
+Поэтому код <code>range(9999999999999)</code> не съест всю память.
+Этот хитрый объект (Sequence ABC, но об этом потом) можно превратить в список явно:</p>
+<pre class="codehilite"><code class="language-python">list(range(9999999999999))</code></pre>
+
+
+<p>(не советую так делать)</p>
+<h3>pass</h3>
+<p>Блок, который ничего не делает:</p>
+<pre class="codehilite"><code class="language-python">for i in range(20):
+    pass  # 20 раз сделать ничего. Очень полезно!</code></pre>
+
+
+<p>Часто используется в начальном коде для заданий: в финальной версии вместо <code>pass</code> должен быть настоящий код.</p>
+            </div>
+            <div id="back_to_index_button">
+                <a class="btn btn-default" href="../../index.html" role="button">К оглавлению</a>
+            </div>
+            <div style="height: 60px;"></div>
+        </div>
+
+        <nav class="navbar navbar-default navbar-fixed-bottom">
+            <div class="footer container">
+                <p class="navbar-text navbar-right">
+                    Made by
+                    <a href="https://github.com/Beastrock">Beastrock</a>
+                </p>
+            </div>
+        </nav>
+
+    </body>
+
+    <!-- /.container -->
+
+    <!-- jQuery Version 1.11.1 -->
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha256-/SIrNqv8h6QGKDuNoLGA4iret+kyesCkHGzVUUV0shc=" crossorigin="anonymous"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+</body>
+
+</html>
